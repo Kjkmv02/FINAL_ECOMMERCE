@@ -1,0 +1,17 @@
+<!-- templates/admin_login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+</head>
+<body>
+    <h1>Admin Login</h1>
+    <form action="/admin/dashboard" method="POST">
+        <label for="code">Ingrese el código:</label>
+        <input type="password" id="code" name="code" required>
+        <button type="submit">Ingresar</button>
+    </form>
+</body>
+</html>

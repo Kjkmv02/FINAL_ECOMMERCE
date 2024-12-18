@@ -1,0 +1,97 @@
+<!-- admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Admin</title>
+    <script>
+        // Función para editar un producto
+        function editProduct(productId) {
+            // Puedes mostrar un formulario para editar o redirigir a una página de edición
+            window.location.href = "/admin/products/edit?id=" + productId;
+        }
+
+        // Función para eliminar un producto
+        function deleteProduct(productId) {
+            if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {
+                // Redirige a la ruta para eliminar el producto
+                window.location.href = "/admin/products/delete?id=" + productId;
+            }
+        }
+        function deleteUser(id) {
+            if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+                window.location.href = "/admin/users/delete?id=" + id;
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Dashboard de Administrador</h1>
+    <!-- Tabla de productos -->
+    <h2>Productos</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .}} <!-- Recorrer los productos pasados desde el controlador -->
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.Name}}</td>
+                <td>{{.Description}}</td>
+                <td>{{.Price}}</td>
+                <td>{{.Stock}}</td>
+                <td>
+                    <!-- Botones de editar, eliminar y añadir -->
+                    <button onclick="editProduct({{.ID}})">Editar</button>
+                    <button onclick="deleteProduct({{.ID}})">Eliminar</button>
+                </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+
+    <!-- Formulario para añadir un nuevo producto -->
+    <h2>Añadir Producto</h2>
+    <form action="/admin/products/add" method="POST">
+        <input type="text" name="name" placeholder="Nombre del Producto" required><br>
+        <input type="text" name="description" placeholder="Descripción" required><br>
+        <input type="number" name="price" placeholder="Precio" required><br>
+        <input type="number" name="stock" placeholder="Stock" required><br>
+        <button type="submit">Añadir Producto</button>
+    </form>
+</body>
+<h2>Usuarios</h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .}}
+    <tr>
+      <td>{{.ID}}</td>
+      <td>{{.Name}}</td>
+      <td>{{.Email}}</td>
+      <td>
+        <button onclick="editUser({{.ID}})">Editar</button>
+        <button onclick="deleteUser({{.ID}})">Eliminar</button>
+      </td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+</html>

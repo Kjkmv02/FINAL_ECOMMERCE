@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Perfumes</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .product { border: 1px solid #ddd; padding: 10px; margin: 10px; display: inline-block; width: 200px; }
+        .product h3 { margin: 0; }
+        .buttons { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido a la Tienda de Perfumes</h1>
+    <div id="products">
+        {{range .}}
+        <div class="product">
+            <h3>{{.Name}}</h3>
+            <p>{{.Description}}</p>
+            <p>Precio: ${{.Price}}</p>
+            <p>Stock: {{.Stock}}</p>
+            <div class="buttons">
+                <button onclick="alert('Producto añadido al carrito')">Añadir al carrito</button>
+            </div>
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>
